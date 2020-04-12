@@ -2,18 +2,23 @@
   "name": "demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "tsc -v",
     "build-server": "tsc -p server",
     "build-client": "tsc -p client",
-    "serve": "node build/server/server.js"
+    "serve": "node build/server/server.js",
+    "debug": "node --inspect=9227 build/server/server.js",
+    "lint": "eslint server/*.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/lodash": "^4.14.149",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^6.8.0",
     "typescript": "^3.8.3"
   },
   "dependencies": {

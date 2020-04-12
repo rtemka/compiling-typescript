@@ -36,6 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 (function () {
     var questions = [];
+    function render() {
+        document.getElementById("Questions").innerHTML = questions.map(function (_a) {
+            var title = _a.title, content = _a.content;
+            return "\n            <li class=\"list-group-item d-flex justify-content-between lh-condensed\">\n                <div>\n                    <h6 class=\"my-0\">" + title + "</h6>\n                    <small class=\"muted\">" + content + "</small>\n                </div>\n            </li>\n        ";
+        }).join("");
+    }
     function init() {
         return __awaiter(this, void 0, void 0, function () {
             var request;
@@ -48,11 +54,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     case 2:
                         questions = _a.sent();
                         console.log(questions);
+                        render();
                         return [2 /*return*/];
                 }
             });
         });
     }
     init();
+    function handleSubmitQuestiomForm() {
+        return __awaiter(this, void 0, void 0, function () {
+            var title, content, request, json;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        event.preventDefault();
+                        title = document.forms["QuestionForm"][0].value;
+                        content = document.forms["QuestionForm"][1].value;
+                        return [4 /*yield*/, fetch("/new?title=" + title + "&content=" + content)];
+                    case 1:
+                        request = _a.sent();
+                        return [4 /*yield*/, request.json()];
+                    case 2:
+                        json = _a.sent();
+                        questions = json.questions;
+                        render();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    document.getElementById("QuestionForm").addEventListener("submit", handleSubmitQuestiomForm);
 })();
 //# sourceMappingURL=client.js.map
